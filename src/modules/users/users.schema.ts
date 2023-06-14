@@ -22,3 +22,5 @@ export class User {
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
+
+export const UserModel = mongoose.model('user', UserSchema);

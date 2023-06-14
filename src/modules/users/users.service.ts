@@ -9,13 +9,11 @@ import { UserDocument } from './users.schema';
 import { RegisterPayload } from 'src/modules/auth/payload/register.payload';
 import * as crypto from 'crypto';
 import { AppRoles } from '../app/app.roles';
-import { ProfileService } from '../profile/profile.service';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectModel('users') private readonly userModel: Model<UserDocument>,
-    private readonly profileService: ProfileService,
   ) {}
 
   get(id: string) {
@@ -49,8 +47,6 @@ export class UsersService {
     });
 
     const userData = await createdUser.save();
-
-    await this.profileService.createUserProfile(userData.id);
 
     return userData;
   }
